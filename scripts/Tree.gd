@@ -7,6 +7,10 @@ var bufferedMovement = null
 var isMovingPlayer = false
 var isPreIdleTimerDone = true
 
+var playerGridPos = Vector2()
+
+var projectileScene = preload("res://scenes/Projectile.tscn")
+
 var storedFood = []
 
 func _init():
@@ -55,6 +59,7 @@ func move_player(moveDir):
 
 func _on_Tween_tween_completed(object, key):
 	if object == $Player:
+		playerGridPos = $Player.position
 		isMovingPlayer = false
 
 func check_movement(newPos):
@@ -64,11 +69,25 @@ func check_movement(newPos):
 		return false
 	if tile == 1: #Walkable
 		return false
-	#Do I even *need* 2 kinds of these?
+	#Do I even *need* 2 kinds of these? I guess if I wanted a walkable area that goes up and down too I would.
 	return true
 
 func _on_PreIdleTimer_timeout():
 	isPreIdleTimerDone = true
+
+func _on_Player_shoot_projectile():
+	var tileCoords = $FunctionalTiles.world_to_map($Player.position/2)
+	var tile = $FunctionalTiles.get_cellv(tileCoords)
+	if tile == 1:
+		#TODO: shoot
+		$Player.heldFood.remove($Player.heldFood.size()-1)
+		print(str("Shot a thing, remaining items: ",$Player.heldFood.size()))
+		#proj.moveDir
+		var newProjectile = projectileScene.instance()
+		newProjectile.setMoveDir(Vector2($Player.facing,0))
+		newProjectile.position = playerGridPos
+		$Projectiles.add_child(newProjectile)
+
 
 
 

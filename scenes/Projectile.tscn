@@ -1,29 +1,26 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scripts/AcornSpawner.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Projectile.gd" type="Script" id=1]
 [ext_resource path="res://images/acorn_spawner.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[node name="FoodSpawner" type="Node2D" groups=[
-"AcornSpawner",
-]]
+[node name="Projectile" type="Node2D"]
+rotation = -1.5708
 script = ExtResource( 1 )
-sprite = ExtResource( 2 )
+projectileSprite = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 0, 0, 32, 32 )
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
+region_rect = Rect2( 128, 0, 32, 32 )
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

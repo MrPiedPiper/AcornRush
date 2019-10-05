@@ -2,10 +2,12 @@ extends Node2D
 
 signal move_player
 signal pickup_food
+signal shoot_projectile
 
 var moveDir = Vector2()
 var touchingList = []
 var heldFood = []
+var facing = 1
 
 func _init():
 	pass
@@ -24,10 +26,15 @@ func _process(delta):
 		if moveDir.y != 0 and moveDir.x != 0:
 			moveDir.y = 0
 		move(moveDir)
-	if Input.is_action_just_pressed("control_confirm"):
+	if Input.is_action_just_pressed("control_interact"):
 		pickup_food()
+	if Input.is_action_just_pressed("control_confirm"):
+		if heldFood.size() > 0:
+			emit_signal("shoot_projectile")
 
 func move(moveDir):
+	if moveDir.x != 0:
+		facing = moveDir.x
 	emit_signal("move_player",moveDir)
 
 func pickup_food():
