@@ -3,6 +3,7 @@ extends Node2D
 export var chanceOfGrowth = .5
 export var growthState = 0
 export var maxGrowth = 3
+export var foodValue = 1
 var hasFood = false
 export(Texture) var sprite
 
@@ -12,7 +13,6 @@ func _ready():
 	$Timer.start()
 
 func _on_Timer_timeout():
-	print(growthState)
 	if randf() < chanceOfGrowth:
 		set_growth(growthState+1)
 	if growthState < maxGrowth:
@@ -29,8 +29,7 @@ func set_growth(newGrowth):
 		$Area2D/CollisionShape2D.disabled = false
 
 func resetFood():
-	growthState = 0
-	hasFood = false
+	set_growth(0)
 	$Timer.start()
 
 
