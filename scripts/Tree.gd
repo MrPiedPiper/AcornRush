@@ -94,9 +94,18 @@ func _on_Player_shoot_projectile():
 		var newProjectile = projectileScene.instance()
 		newProjectile.setMoveDir(Vector2($Player.facing,0))
 		newProjectile.position = playerGridPos
+		newProjectile.connect("move_projectile", self, "_on_Projectile_move_projectile")
 		$Projectiles.add_child(newProjectile)
 
-
+func _on_Projectile_move_projectile(object, dir):
+	var newPos = object.position + dir * moveAmount
+	var tileCoords = $FunctionalTiles.world_to_map(newPos/2)
+	var tile = $FunctionalTiles.get_cellv(tileCoords)
+	
+	if tile == 1 or tile == 0:
+		object.moveTo(newPos)
+	else:
+		object.queue_free()
 
 
 

@@ -44,7 +44,6 @@ func pickup_food():
 			heldFood.append(touchingList[i].owner.foodType)
 			touchingList[i].owner.resetFood()
 
-#Doesn't see it if you're sitting on top when it grows?
 func _on_InteractArea_area_entered(area):
 	if area.owner.name == "FoodSpawner":
 		touchingList.append(area)
