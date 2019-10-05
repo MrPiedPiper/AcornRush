@@ -7,6 +7,8 @@ var bufferedMovement = null
 var isMovingPlayer = false
 var isPreIdleTimerDone = true
 
+var storedFood = []
+
 func _init():
 	
 	pass

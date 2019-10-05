@@ -5,6 +5,7 @@ signal pickup_food
 
 var moveDir = Vector2()
 var touchingList = []
+var heldFood = []
 
 func _init():
 	pass
@@ -33,6 +34,7 @@ func pickup_food():
 	for i in range(0,touchingList.size()):
 		if touchingList[i].owner.hasFood:
 			emit_signal("pickup_food")
+			heldFood.append(touchingList[i].owner.foodType)
 			touchingList[i].owner.resetFood()
 
 #Doesn't see it if you're sitting on top when it grows?

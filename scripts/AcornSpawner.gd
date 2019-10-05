@@ -6,6 +6,7 @@ export var maxGrowth = 3
 export var foodValue = 1
 var hasFood = false
 export(Texture) var sprite
+export var foodType = "Acorn"
 
 func _ready():
 	randomize() #TODO: Move this to the main script
