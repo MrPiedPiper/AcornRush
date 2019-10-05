@@ -46,7 +46,6 @@ func _on_Tween_tween_completed(object, key):
 func check_movement(newPos):
 	var tileCoords = $FunctionalTiles.world_to_map(newPos/2)
 	var tile = $FunctionalTiles.get_cellv(tileCoords)
-	print(tileCoords)
 	if tile == 0: #Climbable
 		return false
 	if tile == 1: #Walkable
