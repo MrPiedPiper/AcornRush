@@ -6,7 +6,9 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[node name="Projectile" type="Node2D"]
+[node name="Projectile" type="Node2D" groups=[
+"Food",
+]]
 rotation = -1.5708
 script = ExtResource( 1 )
 projectileSprite = ExtResource( 2 )

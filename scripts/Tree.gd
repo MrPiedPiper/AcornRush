@@ -87,13 +87,11 @@ func _on_Player_shoot_projectile():
 	var tileCoords = $FunctionalTiles.world_to_map($Player.position/2)
 	var tile = $FunctionalTiles.get_cellv(tileCoords)
 	if tile == 1:
-		#TODO: shoot
-		$Player.heldFood.remove($Player.heldFood.size()-1)
-		print(str("Shot a thing, remaining items: ",$Player.heldFood.size()))
-		#proj.moveDir
 		var newProjectile = projectileScene.instance()
 		newProjectile.setMoveDir(Vector2($Player.facing,0))
 		newProjectile.position = playerGridPos
+		newProjectile.foodType = $Player.heldFood[$Player.heldFood.size()-1]
+		$Player.heldFood.remove($Player.heldFood.size()-1)
 		newProjectile.connect("move_projectile", self, "_on_Projectile_move_projectile")
 		$Projectiles.add_child(newProjectile)
 
@@ -106,6 +104,12 @@ func _on_Projectile_move_projectile(object, dir):
 		object.moveTo(newPos)
 	else:
 		object.queue_free()
+
+func _on_TreeHole_hit_food(owner):
+	if owner.is_in_group("Food"):
+		storedFood.append(owner.foodType)
+		owner.queue_free()
+
 
 
 

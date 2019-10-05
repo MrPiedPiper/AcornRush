@@ -9,6 +9,8 @@ onready var tween = $Tween
 var tweenDuration = 0.5
 var moveAmount = 64
 
+var foodType
+
 func setMoveDir(newMoveDir):
 	print(str(newMoveDir))
 	moveDir = newMoveDir
