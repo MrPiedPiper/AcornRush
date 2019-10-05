@@ -18,6 +18,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("ui_down"):
 		moveDir.y += 1
 	if moveDir != Vector2.ZERO:
+		if moveDir.y != 0 and moveDir.x != 0:
+			moveDir.y = 0
 		move(moveDir)
 
 func move(moveDir):

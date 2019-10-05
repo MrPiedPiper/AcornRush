@@ -3,28 +3,31 @@ extends Node2D
 var moveAmount = 64
 onready var tween = $Tween
 var playerTweenDuration = .125 #Seconds
-var bufferedMovement = Vector2()
+var bufferedMovement = null
+var isMovingPlayer = false
 
 func _init():
 	
 	pass
 
 func _process(delta):
-	if bufferedMovement != Vector2.ZERO:
+	if  !isMovingPlayer and bufferedMovement != null:
 		move_player(bufferedMovement)
-		bufferedMovement = Vector2()
-		print("Buffer used")
+		bufferedMovement = null
 
 func _on_Player_move_player(moveDir):
-	#If it can move, do. Otherwise, return.
-	if tween.is_active():
+	#If it can move, do. Otherwise, set the buffer and return.
+	if isMovingPlayer:
+		#TODO: Don't move diagonally
 		bufferedMovement = moveDir
 		return
-	#TODO Replace with an actual check
-	if true:
-		move_player(moveDir)
+	move_player(moveDir)
 
 func move_player(moveDir):
+	#TODO Replace with an actual check
+	if false:
+		return
+	isMovingPlayer = true
 	tween.interpolate_property(
 		$Player, 
 		'position', 
@@ -36,3 +39,29 @@ func move_player(moveDir):
 		0)
 	print(str(moveDir))
 	tween.start()
+
+func _on_Tween_tween_completed(object, key):
+	if object == $Player:
+		isMovingPlayer = false
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
