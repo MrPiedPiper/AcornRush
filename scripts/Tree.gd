@@ -5,6 +5,7 @@ onready var tween = $Tween
 var playerTweenDuration = .125 #Seconds
 var bufferedMovement = null
 var isMovingPlayer = false
+var isPreIdleTimerDone = true
 
 func _init():
 	
@@ -13,7 +14,10 @@ func _init():
 func _process(delta):
 	if  !isMovingPlayer and bufferedMovement != null:
 		move_player(bufferedMovement)
-		bufferedMovement = null
+		bufferedMovement = null	
+	if isPreIdleTimerDone:
+		$Player/AnimationPlayer.play("Idle")
+		$Player/Sprite.flip_h = false
 
 func _on_Player_move_player(moveDir):
 	#If it can move, do. Otherwise, set the buffer and return.
@@ -24,6 +28,14 @@ func _on_Player_move_player(moveDir):
 	move_player(moveDir)
 
 func move_player(moveDir):
+	$PreIdleTimer.start()
+	isPreIdleTimerDone = false
+	if moveDir.x != 0:
+		$Player/AnimationPlayer.play("Run")
+		if moveDir.x < 0:
+			$Player/Sprite.flip_h = true
+		else:
+			$Player/Sprite.flip_h = false
 	#TODO Replace with an actual check
 	if check_movement($Player.position + moveDir * moveAmount):
 		return
@@ -52,6 +64,10 @@ func check_movement(newPos):
 		return false
 	#Do I even *need* 2 kinds of these?
 	return true
+
+func _on_PreIdleTimer_timeout():
+	isPreIdleTimerDone = true
+
 
 
 
