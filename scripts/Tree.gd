@@ -24,6 +24,7 @@ func _process(delta):
 	if isPreIdleTimerDone:
 		$Player/AnimationPlayer.play("Idle")
 		$Player/Sprite.flip_h = false
+		$Player/Sprite.flip_v = false
 
 func _on_Player_move_player(moveDir):
 	#If it can move, do. Otherwise, set the buffer and return.
@@ -37,11 +38,18 @@ func move_player(moveDir):
 	$PreIdleTimer.start()
 	isPreIdleTimerDone = false
 	if moveDir.x != 0:
+		$Player/Sprite.flip_v = false
 		$Player/AnimationPlayer.play("Run")
 		if moveDir.x < 0:
 			$Player/Sprite.flip_h = true
 		else:
 			$Player/Sprite.flip_h = false
+	elif moveDir.y != 0:
+		$Player/AnimationPlayer.play("Climb")
+		if(moveDir.y < 0):
+			$Player/Sprite.flip_v = false
+		else:
+			$Player/Sprite.flip_v = true
 	#TODO Replace with an actual check
 	if check_movement($Player.position + moveDir * moveAmount):
 		return
