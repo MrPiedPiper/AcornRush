@@ -25,7 +25,7 @@ func _on_Player_move_player(moveDir):
 
 func move_player(moveDir):
 	#TODO Replace with an actual check
-	if false:
+	if check_movement($Player.position + moveDir * moveAmount):
 		return
 	isMovingPlayer = true
 	tween.interpolate_property(
@@ -37,14 +37,22 @@ func move_player(moveDir):
 		Tween.TRANS_QUAD, 
 		Tween.EASE_OUT,
 		0)
-	print(str(moveDir))
 	tween.start()
 
 func _on_Tween_tween_completed(object, key):
 	if object == $Player:
 		isMovingPlayer = false
 
-
+func check_movement(newPos):
+	var tileCoords = $FunctionalTiles.world_to_map(newPos/2)
+	var tile = $FunctionalTiles.get_cellv(tileCoords)
+	print(tileCoords)
+	if tile == 0: #Climbable
+		return false
+	if tile == 1: #Walkable
+		return false
+	#Do I even *need* 2 kinds of these?
+	return true
 
 
 
