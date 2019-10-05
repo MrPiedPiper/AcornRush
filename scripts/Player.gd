@@ -30,9 +30,10 @@ func move(moveDir):
 	emit_signal("move_player",moveDir)
 
 func pickup_food():
-	if touchingList.size() > 0 and touchingList[0].owner.hasFood:
-		emit_signal("pickup_food")
-		touchingList[0].owner.resetFood()
+	for i in range(0,touchingList.size()):
+		if touchingList[i].owner.hasFood:
+			emit_signal("pickup_food")
+			touchingList[i].owner.resetFood()
 
 #Doesn't see it if you're sitting on top when it grows?
 func _on_InteractArea_area_entered(area):
