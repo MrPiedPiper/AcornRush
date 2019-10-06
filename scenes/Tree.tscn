@@ -1,18 +1,19 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/Tree.gd" type="Script" id=1]
 [ext_resource path="res://images/treePlaceholder.png" type="Texture" id=2]
 [ext_resource path="res://images/treetilemap.png" type="Texture" id=3]
 [ext_resource path="res://images/sky_tilemap.png" type="Texture" id=4]
-[ext_resource path="res://images/leafSprite.png" type="Texture" id=5]
-[ext_resource path="res://images/log.png" type="Texture" id=6]
-[ext_resource path="res://images/grass.png" type="Texture" id=7]
-[ext_resource path="res://images/FunctionTilemap.png" type="Texture" id=8]
-[ext_resource path="res://scenes/TreeHole.tscn" type="PackedScene" id=9]
-[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scenes/FoodSpawner.tscn" type="PackedScene" id=11]
-[ext_resource path="res://images/BearExample.png" type="Texture" id=12]
-[ext_resource path="res://images/BaddieExample.png" type="Texture" id=13]
+[ext_resource path="res://images/vine.png" type="Texture" id=5]
+[ext_resource path="res://images/leafSprite.png" type="Texture" id=6]
+[ext_resource path="res://images/log.png" type="Texture" id=7]
+[ext_resource path="res://images/grass.png" type="Texture" id=8]
+[ext_resource path="res://images/FunctionTilemap.png" type="Texture" id=9]
+[ext_resource path="res://scenes/TreeHole.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/FoodSpawner.tscn" type="PackedScene" id=12]
+[ext_resource path="res://images/BearExample.png" type="Texture" id=13]
+[ext_resource path="res://images/BaddieExample.png" type="Texture" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "TreeBrightLeft"
@@ -56,7 +57,7 @@
 4/shapes = [  ]
 4/z_index = 0
 5/name = "leafSprite.png 5"
-5/texture = ExtResource( 5 )
+5/texture = ExtResource( 6 )
 5/tex_offset = Vector2( 0, 0 )
 5/modulate = Color( 1, 1, 1, 1 )
 5/region = Rect2( 0, 0, 32, 32 )
@@ -66,7 +67,7 @@
 5/shapes = [  ]
 5/z_index = 0
 6/name = "log.png 6"
-6/texture = ExtResource( 6 )
+6/texture = ExtResource( 7 )
 6/tex_offset = Vector2( 0, 0 )
 6/modulate = Color( 1, 1, 1, 1 )
 6/region = Rect2( 0, 0, 32, 32 )
@@ -86,7 +87,7 @@
 7/shapes = [  ]
 7/z_index = 0
 8/name = "grass.png 8"
-8/texture = ExtResource( 7 )
+8/texture = ExtResource( 8 )
 8/tex_offset = Vector2( 0, 0 )
 8/modulate = Color( 1, 1, 1, 1 )
 8/region = Rect2( 0, 0, 32, 32 )
@@ -115,10 +116,20 @@
 10/navigation_offset = Vector2( 0, 0 )
 10/shapes = [  ]
 10/z_index = 0
+11/name = "Vine"
+11/texture = ExtResource( 5 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 0, 0, 32, 32 )
+11/tile_mode = 0
+11/occluder_offset = Vector2( 0, 0 )
+11/navigation_offset = Vector2( 0, 0 )
+11/shapes = [  ]
+11/z_index = 0
 
 [sub_resource type="TileSet" id=2]
 0/name = "Climbable"
-0/texture = ExtResource( 8 )
+0/texture = ExtResource( 9 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 32, 32 )
@@ -128,7 +139,7 @@
 0/shapes = [  ]
 0/z_index = 0
 1/name = "Walkable"
-1/texture = ExtResource( 8 )
+1/texture = ExtResource( 9 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 32, 0, 32, 32 )
@@ -172,10 +183,18 @@ cell_size = Vector2( 32, 32 )
 format = 1
 tile_data = PoolIntArray( 7, 0, 0, 8, 0, 0, 65536, 1, 0, 65537, 1, 0, 65538, 1, 0, 65539, 1, 0, 65540, 1, 0, 65541, 1, 0, 65542, 1, 0, 65543, 0, 0, 65544, 0, 0, 65545, 1, 0, 65546, 1, 0, 65547, 1, 0, 65548, 1, 0, 65549, 1, 0, 65550, 1, 0, 65551, 1, 0, 131073, 0, 0, 131079, 0, 0, 131080, 0, 0, 131086, 0, 0, 196608, 1, 0, 196609, 1, 0, 196610, 1, 0, 196611, 1, 0, 196612, 1, 0, 196613, 1, 0, 196614, 1, 0, 196615, 0, 0, 196616, 0, 0, 196617, 1, 0, 196618, 1, 0, 196619, 1, 0, 196620, 1, 0, 196621, 1, 0, 196622, 1, 0, 196623, 1, 0, 262148, 0, 0, 262151, 0, 0, 262152, 0, 0, 262155, 0, 0, 327680, 1, 0, 327681, 1, 0, 327682, 1, 0, 327683, 1, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 0, 0, 327688, 0, 0, 327689, 1, 0, 327690, 1, 0, 327691, 1, 0, 327692, 1, 0, 327693, 1, 0, 327694, 1, 0, 327695, 1, 0, 393218, 0, 0, 393223, 0, 0, 393224, 0, 0, 393229, 0, 0, 458754, 0, 0, 458758, 1, 0, 458759, 0, 0, 458760, 0, 0, 458761, 1, 0, 458765, 0, 0, 524288, 1, 0, 524289, 1, 0, 524290, 1, 0, 524291, 1, 0, 524292, 1, 0, 524293, 1, 0, 524294, 0, 0, 524295, 0, 0, 524296, 0, 0, 524297, 0, 0, 524298, 1, 0, 524299, 1, 0, 524300, 1, 0, 524301, 1, 0, 524302, 1, 0, 524303, 1, 0 )
 
-[node name="TreeHole" parent="." instance=ExtResource( 9 )]
+[node name="TreeHole" parent="." instance=ExtResource( 10 )]
 position = Vector2( 512, 96 )
 
-[node name="Player" parent="." instance=ExtResource( 10 )]
+[node name="PrettyTilesForground" type="TileMap" parent="."]
+position = Vector2( -1, 0 )
+scale = Vector2( 2, 2 )
+tile_set = SubResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 7, 11, 0, 8, 11, 0, 65543, 11, 0, 65544, 11, 0, 131073, 11, 0, 131079, 11, 0, 131080, 11, 0, 131086, 11, 0, 196609, 11, 0, 196615, 11, 0, 196616, 11, 0, 196622, 11, 0, 262148, 11, 0, 262151, 11, 0, 262152, 11, 0, 262155, 11, 0, 327684, 11, 0, 327687, 11, 0, 327688, 11, 0, 327691, 11, 0, 393218, 11, 0, 393223, 11, 0, 393224, 11, 0, 393229, 11, 0, 458754, 11, 0, 458759, 11, 0, 458760, 11, 0, 458765, 11, 0, 524290, 11, 0, 524294, 11, 0, 524295, 11, 0, 524296, 11, 0, 524297, 11, 0, 524301, 11, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 11 )]
 position = Vector2( 416, 96 )
 
 [node name="Tween" type="Tween" parent="."]
@@ -183,16 +202,16 @@ position = Vector2( 416, 96 )
 [node name="FoodSpawners" type="Node2D" parent="."]
 editor/display_folded = true
 
-[node name="FoodSpawner" parent="FoodSpawners" instance=ExtResource( 11 )]
+[node name="FoodSpawner" parent="FoodSpawners" instance=ExtResource( 12 )]
 position = Vector2( 290, 224 )
 
-[node name="FoodSpawner2" parent="FoodSpawners" instance=ExtResource( 11 )]
+[node name="FoodSpawner2" parent="FoodSpawners" instance=ExtResource( 12 )]
 position = Vector2( 930, 352 )
 
-[node name="FoodSpawner3" parent="FoodSpawners" instance=ExtResource( 11 )]
+[node name="FoodSpawner3" parent="FoodSpawners" instance=ExtResource( 12 )]
 position = Vector2( 740, 224 )
 
-[node name="FoodSpawner4" parent="FoodSpawners" instance=ExtResource( 11 )]
+[node name="FoodSpawner4" parent="FoodSpawners" instance=ExtResource( 12 )]
 position = Vector2( 100, 352 )
 
 [node name="PreIdleTimer" type="Timer" parent="."]
@@ -204,14 +223,16 @@ one_shot = true
 [node name="BearTimer" type="Timer" parent="."]
 
 [node name="BearExample" type="Sprite" parent="."]
+visible = false
 position = Vector2( 505, 269 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 12 )
+texture = ExtResource( 13 )
 
 [node name="BaddieExample" type="Sprite" parent="."]
+visible = false
 position = Vector2( 323, 353 )
 scale = Vector2( 2, 2 )
-texture = ExtResource( 13 )
+texture = ExtResource( 14 )
 
 [node name="CountdownTimer" type="Timer" parent="."]
 one_shot = true

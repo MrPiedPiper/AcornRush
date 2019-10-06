@@ -146,6 +146,16 @@ func _on_ThiefSpawnTimer_timeout():
 			$ThiefSpawnTimer.wait_time = newTime
 		$ThiefSpawnTimer.start()
 
+func spawn_thief():
+	#TODO:
+	#Pick a random spot (1-6)
+	#Navigate to that tile
+	#Pickup food when passing over the TreeHole
+	#Update score
+	#Head for the edge of the screen
+	#Drop food to the ground when shot
+	#Zip off screen
+	pass
 
 
 
