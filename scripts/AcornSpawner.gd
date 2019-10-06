@@ -13,6 +13,9 @@ func _ready():
 	$Sprite.texture = sprite
 	$Timer.start()
 
+func get_texture_path():
+	return sprite.get_path()
+
 func _on_Timer_timeout():
 	if randf() < chanceOfGrowth:
 		set_growth(growthState+1)

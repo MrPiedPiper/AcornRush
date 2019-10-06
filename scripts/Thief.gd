@@ -1,6 +1,7 @@
 extends Node2D
 
 signal thief_steal_food
+signal thief_drop_food
 
 var moveAmount = 64
 var heldFood = []
@@ -19,7 +20,7 @@ var isFalling = false
 #
 func _ready():
 	randomize()
-#	tester()
+	thiefGridPos = position
 
 func _process(delta):
 	if isPreIdleTimerDone:
@@ -77,13 +78,12 @@ func move(moveDir):
 		self, 
 		'position', 
 		position, 
-		position + moveDir * moveAmount, 
+		thiefGridPos + moveDir * moveAmount, 
 		thiefTweenDuration, 
 		Tween.TRANS_QUAD, 
 		Tween.EASE_OUT,
 		0)
 	tween.start()
-	pass
 
 func _on_Tween_tween_completed(object, key):
 	thiefGridPos = position
@@ -92,9 +92,15 @@ func _on_Tween_tween_completed(object, key):
 		$Timer.start()
 	elif isLeaving:
 		queue_free()
+	elif isFalling:
+		isFalling = false
+		emit_signal("thief_drop_food", self)
+		isNavigating = false
+		go_off_screen()
 	else:
 		isNavigating = false
 		go_off_screen()
+		
 
 func go_off_screen():
 	isLeaving = true

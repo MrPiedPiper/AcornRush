@@ -230,6 +230,8 @@ one_shot = true
 
 [node name="Projectiles" type="Node2D" parent="."]
 
+[node name="DroppedFood" type="Node2D" parent="."]
+
 [node name="BearTimer" type="Timer" parent="."]
 
 [node name="BearExample" type="Sprite" parent="."]

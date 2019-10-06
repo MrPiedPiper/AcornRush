@@ -41,30 +41,25 @@ func move(moveDir):
 
 func pickup_food():
 	for i in range(0,touchingList.size()):
-		if touchingList[i].owner.hasFood:
+		var theOwner = touchingList[i].owner
+		if theOwner.is_in_group("FoodSpawner") and theOwner.hasFood:
 			emit_signal("pickup_food")
-			var theOwner = touchingList[i].owner
-			var newFood = foodProvider.newFood(theOwner.foodType, theOwner.foodValue)
+			var newFood = foodProvider.newFood(theOwner.foodType, theOwner.foodValue, theOwner.get_texture_path())
 			heldFood.append(newFood)
-			touchingList[i].owner.resetFood()
+			theOwner.resetFood()
+		elif theOwner.is_in_group("FoodPickup"):
+			heldFood.append(foodProvider.newFood(theOwner.foodVar.foodType, theOwner.foodVar.foodValue, theOwner.foodVar.foodTexturePath))
+			print(str(theOwner.foodVar.foodType))
+			theOwner.queue_free()
 
 func _on_InteractArea_area_entered(area):
-	if area.owner.is_in_group("FoodSpawner"):
+	if area.owner.is_in_group("FoodSpawner") or area.owner.is_in_group("FoodPickup"):
 		touchingList.append(area)
-		print(touchingList)
 
 func _on_InteractArea_area_exited(area):
 	for i in range(0,touchingList.size()):
-		if touchingList[i] == area:
+		if touchingList[i-1] == area:
 			touchingList.remove(i)
-
-
-
-
-
-
-
-
 
 
 

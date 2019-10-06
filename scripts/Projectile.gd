@@ -11,6 +11,13 @@ var moveAmount = 64
 
 var foodVar
 
+func setFood(newFood):
+	foodVar = newFood
+	var newTexture = load(newFood.foodTexturePath)
+	$Sprite.texture = newTexture
+	projectileSprite = newTexture
+	print(str("Setting texture to: ",newFood.foodTexturePath))
+
 func setMoveDir(newMoveDir):
 	print(str(newMoveDir))
 	moveDir = newMoveDir
