@@ -6,6 +6,8 @@ signal time_changed
 var maxTime = 90
 var currTime = 90
 
+var difficulty = 10 #Inverse difficulty. 1 is hard, 10 is easy.
+
 var moveAmount = 64
 onready var tween = $Tween
 var playerTweenDuration = .125 #Seconds
@@ -131,6 +133,19 @@ func _on_CountdownTimer_timeout():
 		currTime -= 1
 		emit_signal("time_changed", currTime)
 		$CountdownTimer.start()
+
+func _on_ThiefSpawnTimer_timeout():
+	#Summon baddie
+	print("Fake baddie")
+	#Update time
+	if get_food_value() == 0:
+		$ThiefSpawnTimer.start()
+	else:
+		var newTime = float(10) / (1+float(get_food_value())/1500)
+		print(str("New time is ", newTime))
+		$ThiefSpawnTimer.wait_time = newTime
+		$ThiefSpawnTimer.start()
+
 
 
 
