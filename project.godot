@@ -19,6 +19,11 @@ config/name="LD45"
 run/main_scene="res://scenes/MainScene.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
 [input]
 
 control_up={
@@ -64,4 +69,5 @@ control_interact={
 [rendering]
 
 quality/2d/use_pixel_snap=true
+quality/subsurface_scattering/quality=2
 environment/default_environment="res://default_env.tres"
