@@ -12,6 +12,7 @@ var thiefTweenDuration = .25
 onready var tween = $Tween
 var thiefGridPos = Vector2()
 var isLeaving = false
+var isFalling = false
 
 #func tester():
 #	navigate_to(Vector2(64, 128))
@@ -29,6 +30,8 @@ func _process(delta):
 func _on_InteractArea_area_entered(area):
 	if area.owner.is_in_group("TreeHole"):
 		emit_signal("thief_steal_food", self)
+	if area.owner.is_in_group("Food"):
+		fall()
 
 func get_direction_from_coords(coords):
 	var newDir = (coords - position)
@@ -41,8 +44,14 @@ func get_direction_from_coords(coords):
 func navigate_to(newCoords):
 	isNavigating = true
 	targetCoords = newCoords
-	$Timer.start()
 	#move(get_direction_from_coords(newCoords))
+	$Timer.start()
+
+func fall():
+	isFalling = true
+	isLeaving = false
+	$Timer.wait_time = 0.1
+	navigate_to(Vector2(thiefGridPos.x, 544))
 	
 
 func move(moveDir):

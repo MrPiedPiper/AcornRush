@@ -177,6 +177,9 @@ func _on_Thief_thief_steal_food(thief):
 	if storedFood.size() > 0:
 		thief.heldFood.append(storedFood[storedFood.size()-1])
 		storedFood.remove(storedFood.size()-1)
+		if storedFood.size() > 0:
+			thief.heldFood.append(storedFood[storedFood.size()-1])
+			storedFood.remove(storedFood.size()-1)
 		emit_signal("food_changed", get_food_value())
 
 

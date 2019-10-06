@@ -124,7 +124,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="PreIdleTimer" type="Timer" parent="."]
-wait_time = 0.25
+wait_time = 0.4
 one_shot = true
 [connection signal="area_entered" from="InteractArea" to="." method="_on_InteractArea_area_entered"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
