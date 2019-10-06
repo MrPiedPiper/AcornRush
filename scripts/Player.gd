@@ -40,13 +40,15 @@ func move(moveDir):
 func pickup_food():
 	for i in range(0,touchingList.size()):
 		if touchingList[i].owner.hasFood:
+			print("Picked up")
 			emit_signal("pickup_food")
 			heldFood.append(touchingList[i].owner.foodType)
 			touchingList[i].owner.resetFood()
 
 func _on_InteractArea_area_entered(area):
-	if area.owner.name == "FoodSpawner":
+	if area.owner.is_in_group("FoodSpawner"):
 		touchingList.append(area)
+		print(touchingList)
 
 func _on_InteractArea_area_exited(area):
 	for i in range(0,touchingList.size()):

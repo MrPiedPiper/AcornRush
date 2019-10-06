@@ -151,7 +151,16 @@ position = Vector2( 416, 96 )
 [node name="FoodSpawners" type="Node2D" parent="."]
 
 [node name="FoodSpawner" parent="FoodSpawners" instance=ExtResource( 9 )]
-position = Vector2( 96, 352 )
+position = Vector2( 290, 224 )
+
+[node name="FoodSpawner2" parent="FoodSpawners" instance=ExtResource( 9 )]
+position = Vector2( 930, 352 )
+
+[node name="FoodSpawner3" parent="FoodSpawners" instance=ExtResource( 9 )]
+position = Vector2( 740, 224 )
+
+[node name="FoodSpawner4" parent="FoodSpawners" instance=ExtResource( 9 )]
+position = Vector2( 100, 352 )
 
 [node name="PreIdleTimer" type="Timer" parent="."]
 wait_time = 0.25
