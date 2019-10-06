@@ -149,10 +149,9 @@ func _on_ThiefSpawnTimer_timeout():
 
 func spawn_thief():
 	#TODO:
-	#Pick a random spot (1-6)
 	var branchNum = randi() % 6 + 1 # returns random integer between 1 and 100
-	#Navigate to that tile
 	var newThief = thiefScene.instance()
+	newThief.connect("thief_steal_food", self, "_on_Thief_thief_steal_food")
 	$Thieves.add_child(newThief)
 	newThief.position = Vector2(480, -32) #Top left of the trunk, behind the leaves.
 	if branchNum == 1:
@@ -167,15 +166,18 @@ func spawn_thief():
 		newThief.navigate_to(Vector2(480,352))
 	elif branchNum == 6:
 		newThief.navigate_to(Vector2(544,352))
-	
-	#newThief.navigate_to(
 	#Pickup food when passing over the TreeHole
+	
 	#Update score
-	#Head for the edge of the screen
 	#Drop food to the ground when shot
 	#Zip off screen
 	pass
 
+func _on_Thief_thief_steal_food(thief):
+	if storedFood.size() > 0:
+		thief.heldFood.append(storedFood[storedFood.size()-1])
+		storedFood.remove(storedFood.size()-1)
+		emit_signal("food_changed", get_food_value())
 
 
 
