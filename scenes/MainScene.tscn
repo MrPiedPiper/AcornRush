@@ -16,4 +16,6 @@ current = true
 [node name="UI" type="Node2D" parent="."]
 
 [node name="PlayUI" parent="UI" instance=ExtResource( 3 )]
+anchor_bottom = 0.0
 [connection signal="food_changed" from="Tree" to="." method="_on_Tree_food_changed"]
+[connection signal="time_changed" from="Tree" to="." method="_on_Tree_time_changed"]

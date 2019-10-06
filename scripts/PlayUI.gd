@@ -1,10 +1,15 @@
 extends Control
 
 var currScore = 0
+var currTime = 90
 
 func set_score(newScore):
 	currScore = newScore
 	update_score_label()
+
+func set_time(newTime):
+	currTime = newTime
+	update_time_label()
 
 func increment_score():
 	currScore += 1
@@ -15,7 +20,10 @@ func decrement_score():
 	update_score_label()
 
 func update_score_label():
-	$TextureRect/MarginContainer/HBoxContainer/ScoreValueLabel.text = str(currScore)
+	$TexturePanel/MarginContainer/GridContainer/ScoreValueLabel.text = str(currScore)
+
+func update_time_label():
+	$TexturePanel/MarginContainer/GridContainer/TimeValueLabel.text = str(currTime)
 
 
 

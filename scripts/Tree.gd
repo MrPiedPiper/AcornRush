@@ -1,6 +1,10 @@
 extends Node2D
 
 signal food_changed
+signal time_changed
+
+var maxTime = 90
+var currTime = 90
 
 var moveAmount = 64
 onready var tween = $Tween
@@ -121,6 +125,13 @@ func get_food_value():
 	for i in range(0, storedFood.size()):
 		total += storedFood[i].foodValue
 	return total
+
+func _on_CountdownTimer_timeout():
+	if currTime > 0:
+		currTime -= 1
+		emit_signal("time_changed", currTime)
+		$CountdownTimer.start()
+
 
 
 
