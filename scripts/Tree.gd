@@ -22,6 +22,8 @@ var projectileScene = preload("res://scenes/Projectile.tscn")
 var foodProvider = preload("res://scripts/customClasses/FoodProvider.gd").new()
 var storedFood = []
 
+var thiefScene = preload("res://scenes/Thief.tscn")
+
 func _init():
 	
 	pass
@@ -47,8 +49,8 @@ func move_player(moveDir):
 	$PreIdleTimer.start()
 	isPreIdleTimerDone = false
 	if moveDir.x != 0:
-		$Player/Sprite.flip_v = false
 		$Player/AnimationPlayer.play("Run")
+		$Player/Sprite.flip_v = false
 		if moveDir.x < 0:
 			$Player/Sprite.flip_h = true
 		else:
@@ -136,7 +138,7 @@ func _on_CountdownTimer_timeout():
 
 func _on_ThiefSpawnTimer_timeout():
 	#Summon baddie
-	print("Fake baddie")
+	spawn_thief()
 	#Update time
 	if get_food_value() == 0:
 		$ThiefSpawnTimer.start()
@@ -149,7 +151,25 @@ func _on_ThiefSpawnTimer_timeout():
 func spawn_thief():
 	#TODO:
 	#Pick a random spot (1-6)
+	var branchNum = randi() % 6 + 1 # returns random integer between 1 and 100
 	#Navigate to that tile
+	var newThief = thiefScene.instance()
+	$Thieves.add_child(newThief)
+	newThief.position = Vector2(480, -32) #Top left of the trunk, behind the leaves.
+	if branchNum == 1:
+		newThief.navigate_to(Vector2(480,96))
+	elif branchNum == 2:
+		newThief.navigate_to(Vector2(544,96))
+	elif branchNum == 3:
+		newThief.navigate_to(Vector2(480,224))
+	elif branchNum == 4:
+		newThief.navigate_to(Vector2(544,224))
+	elif branchNum == 5:
+		newThief.navigate_to(Vector2(480,352))
+	elif branchNum == 6:
+		newThief.navigate_to(Vector2(544,352))
+	
+	#newThief.navigate_to(
 	#Pickup food when passing over the TreeHole
 	#Update score
 	#Head for the edge of the screen

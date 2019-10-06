@@ -1,0 +1,90 @@
+extends Node2D
+
+signal thief_steal_food
+
+var moveAmount = 64
+var heldFood = []
+var targetCoords = Vector2()
+var isNavigating = false
+var isPreIdleTimerDone = true
+var isMovingThief = false
+var thiefTweenDuration = .25
+onready var tween = $Tween
+var thiefGridPos = Vector2()
+
+#func tester():
+#	navigate_to(Vector2(64, 128))
+#
+#func _ready():
+#	tester()
+
+func _process(delta):
+	if isPreIdleTimerDone:
+		$AnimationPlayer.play("Idle")
+		$Sprite.flip_h = false
+		$Sprite.flip_v = false
+
+func _on_InteractArea_area_entered(area):
+	if area.owner.is_in_group("TreeHole"):
+		emit_signal("thief_steal_food", self)
+
+func get_direction_from_coords(coords):
+	var newDir = (coords - position)
+	if newDir.x > newDir.y:
+		newDir.y = 0
+	else:
+		newDir.x = 0
+	return newDir.normalized()
+
+func navigate_to(newCoords):
+	isNavigating = true
+	targetCoords = newCoords
+	$Timer.start()
+	move(get_direction_from_coords(newCoords))
+	print(get_direction_from_coords(newCoords))
+	
+
+func move(moveDir):
+	$PreIdleTimer.start()
+	isPreIdleTimerDone = false
+	if moveDir.x != 0:
+		$AnimationPlayer.play("Run")
+		$Sprite.flip_v = false
+		if moveDir.x < 0:
+			$Sprite.flip_h = true
+		else:
+			$Sprite.flip_h = false
+	elif moveDir.y != 0:
+		$AnimationPlayer.play("Climb")
+		if(moveDir.y < 0):
+			$Sprite.flip_v = false
+		else:
+			$Sprite.flip_v = true
+#	if check_movement($Player.position + moveDir * moveAmount):
+#		return
+	isMovingThief = true
+	tween.interpolate_property(
+		self, 
+		'position', 
+		position, 
+		position + moveDir * moveAmount, 
+		thiefTweenDuration, 
+		Tween.TRANS_QUAD, 
+		Tween.EASE_OUT,
+		0)
+	tween.start()
+	pass
+
+func _on_Tween_tween_completed(object, key):
+	thiefGridPos = position
+	isMovingThief = false
+	if thiefGridPos != targetCoords:
+		$Timer.start()
+	else:
+		isNavigating = false
+
+func _on_Timer_timeout():
+	move(get_direction_from_coords(targetCoords))
+
+func _on_PreIdleTimer_timeout():
+	isPreIdleTimerDone = true
