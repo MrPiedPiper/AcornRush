@@ -11,11 +11,13 @@ var isMovingThief = false
 var thiefTweenDuration = .25
 onready var tween = $Tween
 var thiefGridPos = Vector2()
+var isLeaving = false
 
 #func tester():
 #	navigate_to(Vector2(64, 128))
 #
-#func _ready():
+func _ready():
+	randomize()
 #	tester()
 
 func _process(delta):
@@ -39,8 +41,8 @@ func get_direction_from_coords(coords):
 func navigate_to(newCoords):
 	isNavigating = true
 	targetCoords = newCoords
-	#$Timer.start()
-	move(get_direction_from_coords(newCoords))
+	$Timer.start()
+	#move(get_direction_from_coords(newCoords))
 	
 
 func move(moveDir):
@@ -79,11 +81,14 @@ func _on_Tween_tween_completed(object, key):
 	isMovingThief = false
 	if thiefGridPos != targetCoords:
 		$Timer.start()
+	elif isLeaving:
+		queue_free()
 	else:
 		isNavigating = false
 		go_off_screen()
 
 func go_off_screen():
+	isLeaving = true
 	$Timer.stop()
 	var exitOne = Vector2(position.x + 64*8, position.y)
 	var exitTwo = Vector2(position.x - 64*8, position.y)
