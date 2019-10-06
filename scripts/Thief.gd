@@ -39,9 +39,8 @@ func get_direction_from_coords(coords):
 func navigate_to(newCoords):
 	isNavigating = true
 	targetCoords = newCoords
-	$Timer.start()
+	#$Timer.start()
 	move(get_direction_from_coords(newCoords))
-	print(get_direction_from_coords(newCoords))
 	
 
 func move(moveDir):
@@ -82,6 +81,18 @@ func _on_Tween_tween_completed(object, key):
 		$Timer.start()
 	else:
 		isNavigating = false
+		go_off_screen()
+
+func go_off_screen():
+	$Timer.stop()
+	var exitOne = Vector2(position.x + 64*8, position.y)
+	var exitTwo = Vector2(position.x - 64*8, position.y)
+	var target = Vector2()
+	if exitOne.x - exitTwo.x > 0:
+		target = exitOne
+	else:
+		target = exitTwo
+	navigate_to(target)
 
 func _on_Timer_timeout():
 	move(get_direction_from_coords(targetCoords))

@@ -121,7 +121,6 @@ func _on_TreeHole_hit_food(owner):
 		var newFood = foodProvider.newFood(owner.foodVar.foodType,owner.foodVar.foodValue)
 		storedFood.append(newFood)
 		emit_signal("food_changed", get_food_value())
-		print(str(get_food_value()))
 		owner.queue_free()
 
 func get_food_value():
@@ -176,8 +175,6 @@ func spawn_thief():
 	#Drop food to the ground when shot
 	#Zip off screen
 	pass
-
-
 
 
 
