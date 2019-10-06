@@ -9,6 +9,8 @@ var touchingList = []
 var heldFood = []
 var facing = 1
 
+var foodProvider = preload("res://scripts/customClasses/FoodProvider.gd").new()
+
 func _init():
 	pass
 
@@ -40,9 +42,10 @@ func move(moveDir):
 func pickup_food():
 	for i in range(0,touchingList.size()):
 		if touchingList[i].owner.hasFood:
-			print("Picked up")
 			emit_signal("pickup_food")
-			heldFood.append(touchingList[i].owner.foodType)
+			var theOwner = touchingList[i].owner
+			var newFood = foodProvider.newFood(theOwner.foodType, theOwner.foodValue)
+			heldFood.append(newFood)
 			touchingList[i].owner.resetFood()
 
 func _on_InteractArea_area_entered(area):

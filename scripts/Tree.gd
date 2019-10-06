@@ -1,5 +1,7 @@
 extends Node2D
 
+signal food_changed
+
 var moveAmount = 64
 onready var tween = $Tween
 var playerTweenDuration = .125 #Seconds
@@ -11,6 +13,7 @@ var playerGridPos = Vector2()
 
 var projectileScene = preload("res://scenes/Projectile.tscn")
 
+var foodProvider = preload("res://scripts/customClasses/FoodProvider.gd").new()
 var storedFood = []
 
 func _init():
@@ -90,7 +93,7 @@ func _on_Player_shoot_projectile():
 		var newProjectile = projectileScene.instance()
 		newProjectile.setMoveDir(Vector2($Player.facing,0))
 		newProjectile.position = playerGridPos
-		newProjectile.foodType = $Player.heldFood[$Player.heldFood.size()-1]
+		newProjectile.foodVar = $Player.heldFood[$Player.heldFood.size()-1]
 		$Player.heldFood.remove($Player.heldFood.size()-1)
 		newProjectile.connect("move_projectile", self, "_on_Projectile_move_projectile")
 		$Projectiles.add_child(newProjectile)
@@ -107,8 +110,17 @@ func _on_Projectile_move_projectile(object, dir):
 
 func _on_TreeHole_hit_food(owner):
 	if owner.is_in_group("Food"):
-		storedFood.append(owner.foodType)
+		var newFood = foodProvider.newFood(owner.foodVar.foodType,owner.foodVar.foodValue)
+		storedFood.append(newFood)
+		emit_signal("food_changed", get_food_value())
+		print(str(get_food_value()))
 		owner.queue_free()
+
+func get_food_value():
+	var total = 0
+	for i in range(0, storedFood.size()):
+		total += storedFood[i].foodValue
+	return total
 
 
 

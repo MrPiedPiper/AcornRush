@@ -3,10 +3,10 @@ extends Node2D
 export var chanceOfGrowth = .5
 export var growthState = 0
 export var maxGrowth = 3
-export var foodValue = 1
-var hasFood = false
-export(Texture) var sprite
 export var foodType = "Acorn"
+export var foodValue = 100
+export(Texture) var sprite
+var hasFood = false
 
 func _ready():
 	randomize() #TODO: Move this to the main script
