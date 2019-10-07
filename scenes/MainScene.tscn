@@ -33,3 +33,4 @@ volume_db = -8.0
 autoplay = true
 [connection signal="food_changed" from="Tree" to="." method="_on_Tree_food_changed"]
 [connection signal="time_changed" from="Tree" to="." method="_on_Tree_time_changed"]
+[connection signal="play_pressed" from="UI/MainMenu" to="." method="_on_MainMenu_play_pressed"]

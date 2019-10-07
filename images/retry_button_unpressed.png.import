@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/squirrel.png-dd1c01f201a83431922186c4f8ca92ea.stex"
+path="res://.import/retry_button_unpressed.png-0cd79ab8c51697e0d0c9b913eeef8f25.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/squirrel.png"
-dest_files=[ "res://.import/squirrel.png-dd1c01f201a83431922186c4f8ca92ea.stex" ]
+source_file="res://images/retry_button_unpressed.png"
+dest_files=[ "res://.import/retry_button_unpressed.png-0cd79ab8c51697e0d0c9b913eeef8f25.stex" ]
 
 [params]
 
