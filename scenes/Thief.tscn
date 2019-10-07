@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Thief.gd" type="Script" id=1]
 [ext_resource path="res://images/thief_frames.png" type="Texture" id=2]
+[ext_resource path="res://audio/bad_walk.wav" type="AudioStream" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
@@ -126,6 +127,10 @@ one_shot = true
 [node name="PreIdleTimer" type="Timer" parent="."]
 wait_time = 0.4
 one_shot = true
+
+[node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+volume_db = -16.0
 [connection signal="area_entered" from="InteractArea" to="." method="_on_InteractArea_area_entered"]
 [connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

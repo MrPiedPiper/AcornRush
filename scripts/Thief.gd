@@ -53,6 +53,7 @@ func fall():
 	
 
 func move(moveDir):
+	$WalkSound.play(0)
 	tween.stop_all()
 	$PreIdleTimer.start()
 	isPreIdleTimerDone = false

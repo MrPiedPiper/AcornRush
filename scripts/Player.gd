@@ -48,10 +48,13 @@ func pickup_food():
 			var newFood = foodProvider.newFood(theOwner.foodType, theOwner.foodValue, theOwner.get_texture_path())
 			heldFood.append(newFood)
 			theOwner.resetFood()
+			$PickupSound.play(0)
+			return
 		elif theOwner.is_in_group("FoodPickup"):
 			heldFood.append(foodProvider.newFood(theOwner.foodVar.foodType, theOwner.foodVar.foodValue, theOwner.foodVar.foodTexturePath))
-			print(str(theOwner.foodVar.foodType))
 			theOwner.queue_free()
+			$PickupSound.play(0)
+			return
 
 func _on_InteractArea_area_entered(area):
 	touchingList.append(area)
@@ -62,6 +65,7 @@ func _on_InteractArea_area_exited(area):
 	for i in range(0,touchingList.size()):
 		if touchingList[i-1] == area:
 			touchingList.remove(i)
+	print(str(touchingList))
 
 func get_direction_from_coords(coords):
 	var newDir = (coords - position)
@@ -70,8 +74,6 @@ func get_direction_from_coords(coords):
 	else:
 		newDir.x = 0
 	return newDir.normalized()
-
-
 
 
 

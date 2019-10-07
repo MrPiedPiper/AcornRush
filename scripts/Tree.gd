@@ -51,6 +51,7 @@ func _on_Player_move_player(moveDir):
 	move_player(moveDir)
 
 func move_player(moveDir):
+	play_walk()
 	tween.stop_all()
 	$PreIdleTimer.start()
 	isPreIdleTimerDone = false
@@ -68,7 +69,7 @@ func move_player(moveDir):
 		else:
 			$Player/Sprite.flip_v = true
 	#TODO Replace with an actual check
-	if check_movement($Player.position + moveDir * moveAmount):
+	if !isPlayerNavigating and check_movement($Player.position + moveDir * moveAmount):
 		return
 	isMovingPlayer = true
 	tween.interpolate_property(
@@ -83,9 +84,8 @@ func move_player(moveDir):
 	tween.start()
 
 func _on_Tween_tween_completed(object, key):
-	if object == $Player:
-		playerGridPos = $Player.position
-		isMovingPlayer = false
+	playerGridPos = $Player.position
+	isMovingPlayer = false
 	if isPlayerNavigating:
 		if playerGridPos == targetCoords:
 			isPlayerNavigating = false
@@ -108,15 +108,19 @@ func _on_PreIdleTimer_timeout():
 func _on_Player_shoot_projectile():
 	var playerTouchingList = $Player.touchingList
 	for i in range(0,playerTouchingList.size()):
-		var currOwner = playerTouchingList[i].owner
+		var currOwner = playerTouchingList[i-1].owner
 		if currOwner.is_in_group("TreeHole"):
-			var newFood = $Player.heldFood[$Player.heldFood.size()-1]
-			$Player.heldFood.remove($Player.heldFood.size()-1)
-			storedFood.append(newFood)
+			for l in range(0,$Player.heldFood.size()):
+				var newFood = $Player.heldFood[l-1]
+				storedFood.append(newFood)
+			$Player.heldFood.clear()
 			emit_signal("food_changed", get_food_value())
+			$CArpeggioSound.play(0)
+			return
 	var tileCoords = $FunctionalTiles.world_to_map($Player.position/2)
 	var tile = $FunctionalTiles.get_cellv(tileCoords)
 	if tile == 1:
+		$ShootSound.play(0)
 		var newProjectile = projectileScene.instance()
 		newProjectile.setMoveDir(Vector2($Player.facing,0))
 		newProjectile.position = playerGridPos
@@ -136,6 +140,7 @@ func _on_Projectile_move_projectile(object, dir):
 		object.queue_free()
 
 func _on_TreeHole_hit_food(theOwner):
+	$CArpeggioSound.play(0)
 	if theOwner.is_in_group("Food"):
 		var newFood = foodProvider.newFood(theOwner.foodVar.foodType,theOwner.foodVar.foodValue,theOwner.foodVar.foodTexturePath)
 		storedFood.append(newFood)
@@ -215,6 +220,7 @@ func _on_Thief_dropped_food(thief):
 	$DroppedFood.add_child(newFoodPickup) 
 
 func _on_Player_fall():
+	tween.stop_all()
 	#isPlayerFalling = true
 	$FallTimer.wait_time = 0.1
 	navigate_to(Vector2(playerGridPos.x, 544))
@@ -235,6 +241,8 @@ func get_direction_from_coords(coords):
 		newDir.x = 0
 	return newDir.normalized()
 
+func play_walk():
+	$WalkSound.play(0)
 
 
 
