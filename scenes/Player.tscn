@@ -104,7 +104,7 @@ scale = Vector2( 2, 2 )
 texture = ExtResource( 2 )
 hframes = 4
 region_enabled = true
-region_rect = Rect2( 0, 64, 256, 64 )
+region_rect = Rect2( 0, 0, 256, 64 )
 
 [node name="InteractArea" type="Area2D" parent="."]
 

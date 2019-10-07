@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/ui/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://images/title_text.png" type="Texture" id=2]
@@ -7,13 +7,10 @@
 [ext_resource path="res://images/names_text_double.png" type="Texture" id=5]
 [ext_resource path="res://images/ludum_dare_text_double.png" type="Texture" id=6]
 
-[sub_resource type="CanvasItemMaterial" id=1]
-
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.164706, 0.45098, 0.423529, 0.729412 )
 
 [node name="MainMenu" type="Control"]
-material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
@@ -22,7 +19,7 @@ script = ExtResource( 1 )
 pause_mode = 2
 anchor_right = 1.0
 anchor_bottom = 1.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel"]
 anchor_right = 1.0
@@ -59,9 +56,21 @@ margin_right = 1008.0
 margin_bottom = 278.0
 size_flags_horizontal = 3
 
-[node name="TextureButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_right = 1008.0
-margin_bottom = 195.0
+margin_bottom = 210.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/margin_right = 32
+custom_constants/margin_top = 32
+custom_constants/margin_left = 32
+custom_constants/margin_bottom = 32
+
+[node name="TextureButton" type="TextureButton" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer"]
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 976.0
+margin_bottom = 178.0
 size_flags_vertical = 3
 texture_normal = ExtResource( 3 )
 texture_pressed = ExtResource( 4 )
@@ -69,37 +78,33 @@ expand = true
 stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_top = 199.0
+margin_top = 214.0
 margin_right = 1008.0
 margin_bottom = 278.0
 size_flags_horizontal = 3
 size_flags_vertical = 11
-size_flags_stretch_ratio = 0.4
+size_flags_stretch_ratio = 0.0
 
 [node name="TextureRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_top = 15.0
-margin_right = 284.0
-margin_bottom = 79.0
+margin_right = 380.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 texture = ExtResource( 5 )
-stretch_mode = 5
 
 [node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 288.0
+margin_left = 384.0
 margin_right = 784.0
-margin_bottom = 79.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.29
 
 [node name="TextureRect2" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
 margin_left = 788.0
-margin_top = 15.0
 margin_right = 1008.0
-margin_bottom = 79.0
+margin_bottom = 64.0
 size_flags_horizontal = 3
 size_flags_vertical = 8
 texture = ExtResource( 6 )
-stretch_mode = 5
-[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/MarginContainer/TextureButton" to="." method="_on_TextureButton_pressed"]
