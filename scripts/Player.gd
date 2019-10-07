@@ -41,6 +41,8 @@ func move(moveDir):
 	emit_signal("move_player",moveDir)
 
 func pickup_food():
+	if heldFood.size() > 2:
+		return
 	for i in range(0,touchingList.size()):
 		var theOwner = touchingList[i].owner
 		if theOwner.is_in_group("FoodSpawner") and theOwner.hasFood:
