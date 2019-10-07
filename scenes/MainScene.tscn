@@ -1,11 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Tree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui/PlayUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/ui/MainMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/ui/PauseMenu.tscn" type="PackedScene" id=5]
-[ext_resource path="res://audio/LD45Theme.wav" type="AudioStream" id=6]
+[ext_resource path="res://scenes/ui/GameOver.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/LD45Theme.wav" type="AudioStream" id=7]
 
 [node name="MainScene" type="Node2D"]
 pause_mode = 2
@@ -35,13 +36,19 @@ margin_bottom = 0.0
 [node name="PauseMenu" parent="UI" instance=ExtResource( 5 )]
 visible = false
 
+[node name="GameOver" parent="UI" instance=ExtResource( 6 )]
+visible = false
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 6 )
+stream = ExtResource( 7 )
 volume_db = -8.0
 autoplay = true
 [connection signal="food_changed" from="ActiveScene/Tree" to="." method="_on_Tree_food_changed"]
+[connection signal="game_over" from="ActiveScene/Tree" to="." method="_on_Tree_game_over"]
 [connection signal="time_changed" from="ActiveScene/Tree" to="." method="_on_Tree_time_changed"]
 [connection signal="play_pressed" from="UI/MainMenu" to="." method="_on_MainMenu_play_pressed"]
 [connection signal="main_menu_pressed" from="UI/PauseMenu" to="." method="_on_PauseMenu_main_menu_pressed"]
 [connection signal="play_pressed" from="UI/PauseMenu" to="." method="_on_PauseMenu_play_pressed"]
 [connection signal="retry_pressed" from="UI/PauseMenu" to="." method="_on_PauseMenu_retry_pressed"]
+[connection signal="main_menu" from="UI/GameOver" to="." method="_on_GameOver_main_menu"]
+[connection signal="retry" from="UI/GameOver" to="." method="_on_GameOver_retry"]

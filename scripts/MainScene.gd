@@ -16,6 +16,7 @@ func createTree():
 	var newScene = treeScene.instance()
 	newScene.connect("food_changed", self, "_on_Tree_food_changed")
 	newScene.connect("time_changed", self, "_on_Tree_time_changed")
+	newScene.connect("game_over", self, "_on_Tree_game_over")
 	$ActiveScene.add_child(newScene)
 
 func new_game():
@@ -26,6 +27,7 @@ func new_game():
 	$UI/MainMenu.visible = false
 	$UI/PlayUI.visible = true
 	get_tree().paused = false
+	$UI/GameOver.visible = false
 	
 func main_menu():
 	createTree()
@@ -35,6 +37,7 @@ func main_menu():
 	$UI/MainMenu.visible = true
 	$UI/PlayUI.visible = false
 	get_tree().paused = true
+	$UI/GameOver.visible = false
 
 func pause():
 	isPaused = true
@@ -42,6 +45,7 @@ func pause():
 	$UI/MainMenu.visible = false
 	$UI/PlayUI.visible = true
 	get_tree().paused = true
+	$UI/GameOver.visible = false
 
 func unpause():
 	isPaused = false
@@ -49,6 +53,7 @@ func unpause():
 	$UI/MainMenu.visible = false
 	$UI/PlayUI.visible = true
 	get_tree().paused = false
+	$UI/GameOver.visible = false
 
 func retry():
 	new_game()
@@ -78,3 +83,20 @@ func _on_PauseMenu_play_pressed():
 
 func _on_PauseMenu_retry_pressed():
 	retry()
+
+func _on_GameOver_main_menu():
+	main_menu()
+
+func _on_GameOver_retry():
+	new_game()
+
+func _on_Tree_game_over(score):
+	createTree()
+	isInGame = false
+	isPaused = false
+	$UI/PauseMenu.visible = false
+	$UI/MainMenu.visible = false
+	$UI/PlayUI.visible = false
+	get_tree().paused = true
+	$UI/GameOver.set_score(score)
+	$UI/GameOver.visible = true

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/names_text_double.png-4abe11fba63c137beb01f6ce3440ad62.stex"
+path="res://.import/squirrel_end_screen_happy.png-1d2784d654446c2b0a92e2a97db34118.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/names_text_double.png"
-dest_files=[ "res://.import/names_text_double.png-4abe11fba63c137beb01f6ce3440ad62.stex" ]
+source_file="res://images/squirrel_end_screen_happy.png"
+dest_files=[ "res://.import/squirrel_end_screen_happy.png-1d2784d654446c2b0a92e2a97db34118.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

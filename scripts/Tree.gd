@@ -2,6 +2,7 @@ extends Node2D
 
 signal food_changed
 signal time_changed
+signal game_over
 
 var maxTime = 90
 var currTime = 90
@@ -184,6 +185,8 @@ func _on_CountdownTimer_timeout():
 		currTime -= 1
 		emit_signal("time_changed", currTime)
 		$CountdownTimer.start()
+	else:
+		emit_signal("game_over",get_food_value())
 
 func _on_ThiefSpawnTimer_timeout():
 	#Summon baddie

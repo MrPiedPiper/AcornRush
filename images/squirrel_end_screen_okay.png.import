@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ludum_dare_text_doublet.png-114aa93f57aa6ab7bc5137b2bc01fd2d.stex"
+path="res://.import/squirrel_end_screen_okay.png-8a96ab4715ac9e5a7fef74b111115b58.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/ludum_dare_text_doublet.png"
-dest_files=[ "res://.import/ludum_dare_text_doublet.png-114aa93f57aa6ab7bc5137b2bc01fd2d.stex" ]
+source_file="res://images/squirrel_end_screen_okay.png"
+dest_files=[ "res://.import/squirrel_end_screen_okay.png-8a96ab4715ac9e5a7fef74b111115b58.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
