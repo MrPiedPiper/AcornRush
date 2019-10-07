@@ -200,6 +200,7 @@ func _on_Thief_dropped_food(thief):
 	newFoodPickup.change_texture(goldenAcornTexture)
 	newFoodPickup.change_food(newFood)
 	newFoodPickup.position = thief.position
+	newFoodPickup.self_destruct(7)
 	for i in range(0,thief.heldFood.size()):
 		storedFood.append(thief.heldFood[i])
 		emit_signal("food_changed", get_food_value())

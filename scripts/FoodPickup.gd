@@ -20,6 +20,14 @@ func change_food(newFood):
 	foodType = foodVar.foodType
 	foodValue = foodVar.foodValue
 
+func self_destruct(fuse):
+	$Timer.wait_time = fuse
+	$Timer.start()
+
+func _on_Timer_timeout():
+	queue_free()
+
+
 
 
 
