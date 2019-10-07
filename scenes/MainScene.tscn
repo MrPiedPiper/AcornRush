@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/MainScene.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Tree.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/ui/PlayUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://audio/LD45Theme.wav" type="AudioStream" id=4]
 
 [node name="MainScene" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,5 +22,10 @@ zoom = Vector2( 1.3, 1.3 )
 anchor_right = 1.0
 margin_right = 0.0
 margin_bottom = 0.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )
+volume_db = -8.0
+autoplay = true
 [connection signal="food_changed" from="Tree" to="." method="_on_Tree_food_changed"]
 [connection signal="time_changed" from="Tree" to="." method="_on_Tree_time_changed"]

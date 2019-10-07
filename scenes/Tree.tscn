@@ -263,13 +263,15 @@ one_shot = true
 
 [node name="WalkSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 15 )
-volume_db = -16.0
+volume_db = -20.0
 
 [node name="CArpeggioSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 16 )
+volume_db = -20.0
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 17 )
+volume_db = -20.0
 
 [node name="Follow1" type="Sprite" parent="."]
 scale = Vector2( 2, 2 )
