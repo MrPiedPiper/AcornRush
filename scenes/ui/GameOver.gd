@@ -9,10 +9,10 @@ signal main_menu
 
 func set_score(newScore):
 	$MarginContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Score.text = str("You got ",newScore," points!")
-	if newScore > 5000:
+	if newScore > 2000:
 		$MarginContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Squirrel.texture = happyTexture
 		$MarginContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Quip.text = "Plenty for winter. Congrats!"
-	elif newScore > 2500:
+	elif newScore > 750:
 		$MarginContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Squirrel.texture = okTexture
 		$MarginContainer/MarginContainer/HBoxContainer/MarginContainer/VBoxContainer/Quip.text = "That should be enough c:"
 	else:

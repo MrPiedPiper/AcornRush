@@ -131,6 +131,8 @@ func _on_PreIdleTimer_timeout():
 	isPreIdleTimerDone = true
 
 func _on_Player_shoot_projectile():
+	if isPlayerNavigating:
+		return
 	var playerTouchingList = $Player.touchingList
 	for i in range(0,playerTouchingList.size()):
 		var currOwner = playerTouchingList[i-1].owner
@@ -144,7 +146,7 @@ func _on_Player_shoot_projectile():
 			return
 	var tileCoords = $FunctionalTiles.world_to_map($Player.position/2)
 	var tile = $FunctionalTiles.get_cellv(tileCoords)
-	if tile == 1 and !isCoolingDown:
+	if tile == 1 or tile == 0 and !isCoolingDown:
 		$ShootCooldownTimer.start(0)
 		isCoolingDown = true
 		$ShootSound.play(0)

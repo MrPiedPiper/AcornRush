@@ -10,6 +10,7 @@ extents = Vector2( 16, 16 )
 "FoodSpawner",
 ]]
 script = ExtResource( 1 )
+chanceOfGrowth = 0.66
 sprite = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -19,7 +20,7 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 2.0
 one_shot = true
 
 [node name="Area2D" type="Area2D" parent="."]

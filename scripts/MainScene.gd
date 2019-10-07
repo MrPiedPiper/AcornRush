@@ -20,6 +20,8 @@ func createTree():
 	$ActiveScene.add_child(newScene)
 
 func new_game():
+	$UI/PlayUI.set_time(90)
+	$UI/PlayUI.set_score(0)
 	isInGame = true
 	isPaused = false
 	createTree()

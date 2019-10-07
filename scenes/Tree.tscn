@@ -213,7 +213,6 @@ position = Vector2( 416, 96 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="FoodSpawners" type="Node2D" parent="."]
-editor/display_folded = true
 
 [node name="FoodSpawner" parent="FoodSpawners" instance=ExtResource( 12 )]
 position = Vector2( 290, 224 )
