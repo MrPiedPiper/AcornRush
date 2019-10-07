@@ -143,7 +143,8 @@ func _on_Player_shoot_projectile():
 			return
 	var tileCoords = $FunctionalTiles.world_to_map($Player.position/2)
 	var tile = $FunctionalTiles.get_cellv(tileCoords)
-	if tile == 1:
+	if tile == 1 and !isCoolingDown:
+		$ShootCooldownTimer.start(0)
 		isCoolingDown = true
 		$ShootSound.play(0)
 		var newProjectile = projectileScene.instance()
