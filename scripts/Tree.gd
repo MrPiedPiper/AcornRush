@@ -24,7 +24,7 @@ var storedFood = []
 
 var thiefScene = preload("res://scenes/Thief.tscn")
 var foodPickupScene = preload("res://scenes/FoodPickup.tscn")
-var goldenAcornTexture = preload("res://images/squirrel_run.png") #TODO Replace with actual image
+var goldenAcornTexture = preload("res://images/golden_acorn_spawner.png") #TODO Replace with actual image
 
 func _init():
 	
@@ -187,7 +187,7 @@ func _on_Thief_thief_steal_food(thief):
 
 func _on_Thief_dropped_food(thief):
 	var newFoodPickup = foodPickupScene.instance()
-	var newFood = foodProvider.newFood("Golden Acorn", 200, "res://images/squirrel_frames.png")
+	var newFood = foodProvider.newFood("Golden Acorn", 200, "res://images/golden_acorn_spawner.png")
 	newFoodPickup.change_texture(goldenAcornTexture)
 	newFoodPickup.change_food(newFood)
 	newFoodPickup.position = thief.position
