@@ -15,6 +15,7 @@ var bufferedMovement = null
 var isMovingPlayer = false
 var isPreIdleTimerDone = true
 
+var previousPlayerGridPos = Vector2()
 var playerGridPos = Vector2()
 
 var projectileScene = preload("res://scenes/Projectile.tscn")
@@ -31,6 +32,7 @@ var isPlayerNavigating = false
 var targetCoords = Vector2()
 
 func _ready():
+	previousPlayerGridPos = $Player.position
 	playerGridPos = $Player.position
 
 func _process(delta):
@@ -41,6 +43,23 @@ func _process(delta):
 		$Player/AnimationPlayer.play("Idle")
 		$Player/Sprite.flip_h = false
 		$Player/Sprite.flip_v = false
+	var playerFoodCount = $Player.heldFood.size()
+	if playerFoodCount == 0:
+		$Follow1.texture = null
+		$Follow2.texture = null
+		$Follow3.texture = null
+	elif playerFoodCount == 1:
+		$Follow2.texture = null
+		$Follow3.texture = null
+	elif playerFoodCount == 2:
+		$Follow3.texture = null
+	for i in range(0, $Player.heldFood.size()):
+		if i == 0:
+			$Follow1.texture = load($Player.heldFood[i].foodTexturePath)
+		elif i == 1:
+			$Follow2.texture = load($Player.heldFood[i].foodTexturePath)
+		elif i == 2:
+			$Follow3.texture = load($Player.heldFood[i].foodTexturePath)
 
 func _on_Player_move_player(moveDir):
 	#If it can move, do. Otherwise, set the buffer and return.
@@ -84,7 +103,9 @@ func move_player(moveDir):
 	tween.start()
 
 func _on_Tween_tween_completed(object, key):
+	previousPlayerGridPos = playerGridPos
 	playerGridPos = $Player.position
+	update_tails(previousPlayerGridPos)
 	isMovingPlayer = false
 	if isPlayerNavigating:
 		if playerGridPos == targetCoords:
@@ -244,6 +265,21 @@ func get_direction_from_coords(coords):
 func play_walk():
 	$WalkSound.play(0)
 
+func update_tails(newPos):
+	$FollowTween.interpolate_callback(self, 0.125, "follow2", $Follow1.position)
+	$FollowTween.start()
+	$FollowTween.interpolate_property($Follow1, "position", $Follow1.position, newPos, 0.125, Tween.TRANS_QUAD, Tween.EASE_IN)
+	$FollowTween.start()
+
+func follow2(newPos):
+	$FollowTween.interpolate_callback(self, 0.125, "follow3", $Follow2.position)
+	$FollowTween.start()
+	$FollowTween.interpolate_property($Follow2, "position", $Follow2.position, newPos, 0.125, Tween.TRANS_QUAD, Tween.EASE_IN)
+	$FollowTween.start()
+
+func follow3(newPos):
+	$FollowTween.interpolate_property($Follow3, "position", $Follow3.position, newPos, 0.125, Tween.TRANS_QUAD, Tween.EASE_IN)
+	$FollowTween.start()
 
 
 

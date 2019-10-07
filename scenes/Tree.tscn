@@ -270,6 +270,23 @@ stream = ExtResource( 16 )
 
 [node name="ShootSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 17 )
+
+[node name="Follow1" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Follow2" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="Follow3" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+region_enabled = true
+region_rect = Rect2( 128, 0, 32, 32 )
+
+[node name="FollowTween" type="Tween" parent="."]
 [connection signal="hit_food" from="TreeHole" to="." method="_on_TreeHole_hit_food"]
 [connection signal="fall" from="Player" to="." method="_on_Player_fall"]
 [connection signal="move_player" from="Player" to="." method="_on_Player_move_player"]

@@ -65,7 +65,6 @@ func _on_InteractArea_area_exited(area):
 	for i in range(0,touchingList.size()):
 		if touchingList[i-1] == area:
 			touchingList.remove(i)
-	print(str(touchingList))
 
 func get_direction_from_coords(coords):
 	var newDir = (coords - position)
@@ -74,9 +73,6 @@ func get_direction_from_coords(coords):
 	else:
 		newDir.x = 0
 	return newDir.normalized()
-
-
-
 
 
 
