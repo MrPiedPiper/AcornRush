@@ -111,6 +111,7 @@ func _on_Tween_tween_completed(object, key):
 		if playerGridPos == targetCoords:
 			isPlayerNavigating = false
 		else:
+			bufferedMovement = null
 			$FallTimer.start()
 
 func check_movement(newPos):
@@ -256,7 +257,7 @@ func _on_FallTimer_timeout():
 	move_player(get_direction_from_coords(targetCoords))
 
 func get_direction_from_coords(coords):
-	var newDir = (coords - position)
+	var newDir = (coords - $Player.position)
 	if newDir.x > newDir.y:
 		newDir.y = 0
 	else:
