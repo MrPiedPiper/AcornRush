@@ -198,7 +198,7 @@ func _on_ThiefSpawnTimer_timeout():
 		$ThiefSpawnTimer.start()
 	else:
 		var newTime = float(10) / (1+float(get_food_value())/1500)
-		if newTime > 4:
+		if newTime > 5:
 			$ThiefSpawnTimer.wait_time = newTime
 		$ThiefSpawnTimer.start()
 
