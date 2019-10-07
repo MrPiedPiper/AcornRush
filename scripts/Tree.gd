@@ -49,17 +49,17 @@ func _process(delta):
 		$Follow2.texture = null
 		$Follow3.texture = null
 	elif playerFoodCount == 1:
+		$Follow1.texture = load($Player.heldFood[0].foodTexturePath)
 		$Follow2.texture = null
 		$Follow3.texture = null
 	elif playerFoodCount == 2:
+		$Follow1.texture = load($Player.heldFood[1].foodTexturePath)
+		$Follow2.texture = load($Player.heldFood[0].foodTexturePath)
 		$Follow3.texture = null
-	for i in range(0, $Player.heldFood.size()):
-		if i == 0:
-			$Follow1.texture = load($Player.heldFood[i].foodTexturePath)
-		elif i == 1:
-			$Follow2.texture = load($Player.heldFood[i].foodTexturePath)
-		elif i == 2:
-			$Follow3.texture = load($Player.heldFood[i].foodTexturePath)
+	elif playerFoodCount == 3:
+		$Follow1.texture = load($Player.heldFood[2].foodTexturePath)
+		$Follow2.texture = load($Player.heldFood[1].foodTexturePath)
+		$Follow3.texture = load($Player.heldFood[0].foodTexturePath)
 
 func _on_Player_move_player(moveDir):
 	#If it can move, do. Otherwise, set the buffer and return.
