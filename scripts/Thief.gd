@@ -15,9 +15,6 @@ var thiefGridPos = Vector2()
 var isLeaving = false
 var isFalling = false
 
-#func tester():
-#	navigate_to(Vector2(64, 128))
-#
 func _ready():
 	randomize()
 	thiefGridPos = position
@@ -56,6 +53,7 @@ func fall():
 	
 
 func move(moveDir):
+	tween.stop_all()
 	$PreIdleTimer.start()
 	isPreIdleTimerDone = false
 	if moveDir.x != 0:

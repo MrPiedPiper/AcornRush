@@ -3,6 +3,7 @@ extends Node2D
 signal move_player
 signal pickup_food
 signal shoot_projectile
+signal fall
 
 var moveDir = Vector2()
 var touchingList = []
@@ -55,12 +56,21 @@ func pickup_food():
 func _on_InteractArea_area_entered(area):
 	if area.owner.is_in_group("FoodSpawner") or area.owner.is_in_group("FoodPickup"):
 		touchingList.append(area)
+	if area.owner.is_in_group("Thief"):
+		emit_signal("fall")
 
 func _on_InteractArea_area_exited(area):
 	for i in range(0,touchingList.size()):
 		if touchingList[i-1] == area:
 			touchingList.remove(i)
 
+func get_direction_from_coords(coords):
+	var newDir = (coords - position)
+	if newDir.x > newDir.y:
+		newDir.y = 0
+	else:
+		newDir.x = 0
+	return newDir.normalized()
 
 
 

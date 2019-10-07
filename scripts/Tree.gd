@@ -26,12 +26,15 @@ var thiefScene = preload("res://scenes/Thief.tscn")
 var foodPickupScene = preload("res://scenes/FoodPickup.tscn")
 var goldenAcornTexture = preload("res://images/golden_acorn_spawner.png") #TODO Replace with actual image
 
-func _init():
-	
-	pass
+var isPlayerFalling = false
+var isPlayerNavigating = false
+var targetCoords = Vector2()
+
+func _ready():
+	playerGridPos = $Player.position
 
 func _process(delta):
-	if  !isMovingPlayer and bufferedMovement != null:
+	if  !isMovingPlayer and !isPlayerNavigating and bufferedMovement != null:
 		move_player(bufferedMovement)
 		bufferedMovement = null	
 	if isPreIdleTimerDone:
@@ -41,13 +44,14 @@ func _process(delta):
 
 func _on_Player_move_player(moveDir):
 	#If it can move, do. Otherwise, set the buffer and return.
-	if isMovingPlayer:
+	if isMovingPlayer or isPlayerNavigating:
 		#TODO: Don't move diagonally
 		bufferedMovement = moveDir
 		return
 	move_player(moveDir)
 
 func move_player(moveDir):
+	tween.stop_all()
 	$PreIdleTimer.start()
 	isPreIdleTimerDone = false
 	if moveDir.x != 0:
@@ -71,7 +75,7 @@ func move_player(moveDir):
 		$Player, 
 		'position', 
 		$Player.position, 
-		$Player.position + moveDir * moveAmount, 
+		playerGridPos + moveDir * moveAmount, 
 		playerTweenDuration, 
 		Tween.TRANS_QUAD, 
 		Tween.EASE_OUT,
@@ -82,6 +86,11 @@ func _on_Tween_tween_completed(object, key):
 	if object == $Player:
 		playerGridPos = $Player.position
 		isMovingPlayer = false
+	if isPlayerNavigating:
+		if playerGridPos == targetCoords:
+			isPlayerNavigating = false
+		else:
+			$FallTimer.start()
 
 func check_movement(newPos):
 	var tileCoords = $FunctionalTiles.world_to_map(newPos/2)
@@ -196,7 +205,26 @@ func _on_Thief_dropped_food(thief):
 		emit_signal("food_changed", get_food_value())
 	$DroppedFood.add_child(newFoodPickup) 
 
+func _on_Player_fall():
+	#isPlayerFalling = true
+	$FallTimer.wait_time = 0.1
+	navigate_to(Vector2(playerGridPos.x, 544))
 
+func navigate_to(newCoords):
+	isPlayerNavigating = true
+	targetCoords = newCoords
+	$FallTimer.start()
+
+func _on_FallTimer_timeout():
+	move_player(get_direction_from_coords(targetCoords))
+
+func get_direction_from_coords(coords):
+	var newDir = (coords - position)
+	if newDir.x > newDir.y:
+		newDir.y = 0
+	else:
+		newDir.x = 0
+	return newDir.normalized()
 
 
 

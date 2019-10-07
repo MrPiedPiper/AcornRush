@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 16, 16 )
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=2]
 resource_name = "Climb"
 length = 0.25
 loop = true
@@ -36,7 +36,7 @@ tracks/1/keys = {
 "values": [ Rect2( 0, 128, 256, 64 ), Rect2( 0, 128, 256, 64 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 loop = true
 step = 0.05
 tracks/0/type = "value"
@@ -111,8 +111,8 @@ region_rect = Rect2( 0, 0, 256, 64 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Climb = SubResource( 5 )
-anims/Idle = SubResource( 6 )
+anims/Climb = SubResource( 2 )
+anims/Idle = SubResource( 3 )
 anims/Run = SubResource( 4 )
 [connection signal="area_entered" from="InteractArea" to="." method="_on_InteractArea_area_entered"]
 [connection signal="area_exited" from="InteractArea" to="." method="_on_InteractArea_area_exited"]
