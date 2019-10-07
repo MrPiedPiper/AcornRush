@@ -59,6 +59,8 @@ func pickup_food():
 			return
 
 func _on_InteractArea_area_entered(area):
+	if area.owner.is_in_group("Ignore"):
+		return
 	touchingList.append(area)
 	if area.owner.is_in_group("Thief"):
 		emit_signal("fall")

@@ -15,6 +15,9 @@ var thiefGridPos = Vector2()
 var isLeaving = false
 var isFalling = false
 
+var regularTexture = preload("res://images/thief_frames.png")
+var bagTexture = preload("res://images/thief_frames_bag.png")
+
 func _ready():
 	randomize()
 	thiefGridPos = position
@@ -31,6 +34,9 @@ func _on_InteractArea_area_entered(area):
 	if area.owner.is_in_group("Food"):
 		fall()
 
+func give_bag():
+	$Sprite.texture = bagTexture
+
 func get_direction_from_coords(coords):
 	var newDir = (coords - position)
 	if newDir.x > newDir.y:
@@ -46,6 +52,7 @@ func navigate_to(newCoords):
 	$Timer.start()
 
 func fall():
+	add_to_group("Ignore")
 	isFalling = true
 	isLeaving = false
 	$Timer.wait_time = 0.1
@@ -94,6 +101,7 @@ func _on_Tween_tween_completed(object, key):
 	elif isFalling:
 		isFalling = false
 		emit_signal("thief_drop_food", self)
+		$Sprite.texture = regularTexture
 		isNavigating = false
 		go_off_screen()
 	else:
