@@ -24,7 +24,7 @@ custom_styles/panel = SubResource( 1 )
 
 [node name="MarginContainer" type="MarginContainer" parent="TexturePanel"]
 margin_right = 1024.0
-margin_bottom = 160.0
+margin_bottom = 92.0
 custom_constants/margin_right = 16
 custom_constants/margin_top = 16
 custom_constants/margin_left = 16
@@ -34,34 +34,34 @@ custom_constants/margin_bottom = 16
 margin_left = 16.0
 margin_top = 16.0
 margin_right = 1008.0
-margin_bottom = 144.0
+margin_bottom = 76.0
 custom_constants/vseparation = 8
 columns = 2
 
 [node name="TimeTextLabel" type="Label" parent="TexturePanel/MarginContainer/GridContainer"]
-margin_right = 87.0
+margin_right = 96.0
 margin_bottom = 26.0
 custom_fonts/font = SubResource( 2 )
 text = "Time: "
 
 [node name="TimeValueLabel" type="Label" parent="TexturePanel/MarginContainer/GridContainer"]
-margin_left = 91.0
-margin_right = 124.0
+margin_left = 100.0
+margin_right = 133.0
 margin_bottom = 26.0
 custom_fonts/font = SubResource( 2 )
 text = "90"
 
 [node name="ScoreTextLabel" type="Label" parent="TexturePanel/MarginContainer/GridContainer"]
 margin_top = 34.0
-margin_right = 87.0
+margin_right = 96.0
 margin_bottom = 60.0
 custom_fonts/font = SubResource( 2 )
-text = "Time: "
+text = "Score: "
 
 [node name="ScoreValueLabel" type="Label" parent="TexturePanel/MarginContainer/GridContainer"]
-margin_left = 91.0
+margin_left = 100.0
 margin_top = 34.0
-margin_right = 124.0
+margin_right = 133.0
 margin_bottom = 60.0
 custom_fonts/font = SubResource( 2 )
 text = "0"

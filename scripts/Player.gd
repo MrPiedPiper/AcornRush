@@ -66,9 +66,7 @@ func _on_InteractArea_area_entered(area):
 		emit_signal("fall")
 
 func _on_InteractArea_area_exited(area):
-	for i in range(0,touchingList.size()):
-		if touchingList[i-1] == area:
-			touchingList.remove(i)
+	touchingList.erase(area)
 
 func get_direction_from_coords(coords):
 	var newDir = (coords - position)
