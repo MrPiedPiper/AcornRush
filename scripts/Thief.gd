@@ -33,6 +33,7 @@ func _on_InteractArea_area_entered(area):
 		emit_signal("thief_steal_food", self)
 	if area.owner.is_in_group("Food"):
 		fall()
+		area.owner.queue_free()
 
 func give_bag():
 	$Sprite.texture = bagTexture

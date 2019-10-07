@@ -289,6 +289,9 @@ region_enabled = true
 region_rect = Rect2( 128, 0, 32, 32 )
 
 [node name="FollowTween" type="Tween" parent="."]
+
+[node name="ShootCooldownTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="hit_food" from="TreeHole" to="." method="_on_TreeHole_hit_food"]
 [connection signal="fall" from="Player" to="." method="_on_Player_fall"]
 [connection signal="move_player" from="Player" to="." method="_on_Player_move_player"]
@@ -298,3 +301,4 @@ region_rect = Rect2( 128, 0, 32, 32 )
 [connection signal="timeout" from="CountdownTimer" to="." method="_on_CountdownTimer_timeout"]
 [connection signal="timeout" from="ThiefSpawnTimer" to="." method="_on_ThiefSpawnTimer_timeout"]
 [connection signal="timeout" from="FallTimer" to="." method="_on_FallTimer_timeout"]
+[connection signal="timeout" from="ShootCooldownTimer" to="." method="_on_ShootCooldownTimer_timeout"]

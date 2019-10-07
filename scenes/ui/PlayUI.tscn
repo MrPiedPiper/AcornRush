@@ -13,6 +13,7 @@ size = 32
 font_data = ExtResource( 3 )
 
 [node name="PlayUI" type="Control"]
+pause_mode = 2
 margin_right = 1024.0
 margin_bottom = 80.0
 script = ExtResource( 1 )

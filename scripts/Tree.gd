@@ -31,6 +31,8 @@ var isPlayerFalling = false
 var isPlayerNavigating = false
 var targetCoords = Vector2()
 
+var isCoolingDown = false
+
 func _ready():
 	previousPlayerGridPos = $Player.position
 	playerGridPos = $Player.position
@@ -142,6 +144,7 @@ func _on_Player_shoot_projectile():
 	var tileCoords = $FunctionalTiles.world_to_map($Player.position/2)
 	var tile = $FunctionalTiles.get_cellv(tileCoords)
 	if tile == 1:
+		isCoolingDown = true
 		$ShootSound.play(0)
 		var newProjectile = projectileScene.instance()
 		newProjectile.setMoveDir(Vector2($Player.facing,0))
@@ -282,6 +285,10 @@ func follow2(newPos):
 func follow3(newPos):
 	$FollowTween.interpolate_property($Follow3, "position", $Follow3.position, newPos, 0.125, Tween.TRANS_QUAD, Tween.EASE_IN)
 	$FollowTween.start()
+
+func _on_ShootCooldownTimer_timeout():
+	isCoolingDown = false
+
 
 
 

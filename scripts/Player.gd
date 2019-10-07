@@ -69,12 +69,8 @@ func _on_InteractArea_area_exited(area):
 	touchingList.erase(area)
 
 func get_direction_from_coords(coords):
-	var newDir = (coords - position)
-	if newDir.x > newDir.y:
-		newDir.y = 0
-	else:
-		newDir.x = 0
-	return newDir.normalized()
+	pass # Replace with function body.
+
 
 
 
