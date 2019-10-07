@@ -54,8 +54,7 @@ func pickup_food():
 			theOwner.queue_free()
 
 func _on_InteractArea_area_entered(area):
-	if area.owner.is_in_group("FoodSpawner") or area.owner.is_in_group("FoodPickup"):
-		touchingList.append(area)
+	touchingList.append(area)
 	if area.owner.is_in_group("Thief"):
 		emit_signal("fall")
 

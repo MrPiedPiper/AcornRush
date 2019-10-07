@@ -106,6 +106,14 @@ func _on_PreIdleTimer_timeout():
 	isPreIdleTimerDone = true
 
 func _on_Player_shoot_projectile():
+	var playerTouchingList = $Player.touchingList
+	for i in range(0,playerTouchingList.size()):
+		var currOwner = playerTouchingList[i].owner
+		if currOwner.is_in_group("TreeHole"):
+			var newFood = $Player.heldFood[$Player.heldFood.size()-1]
+			$Player.heldFood.remove($Player.heldFood.size()-1)
+			storedFood.append(newFood)
+			emit_signal("food_changed", get_food_value())
 	var tileCoords = $FunctionalTiles.world_to_map($Player.position/2)
 	var tile = $FunctionalTiles.get_cellv(tileCoords)
 	if tile == 1:
@@ -226,8 +234,6 @@ func get_direction_from_coords(coords):
 	else:
 		newDir.x = 0
 	return newDir.normalized()
-
-
 
 
 
