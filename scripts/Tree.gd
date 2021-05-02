@@ -210,6 +210,7 @@ func spawn_thief():
 	newThief.connect("thief_drop_food", self, "_on_Thief_dropped_food")
 	newThief.position = Vector2(480, -32) #Top left of the trunk, behind the leaves.
 	$Thieves.add_child(newThief)
+	print(branchNum)
 	if branchNum == 1:
 		newThief.navigate_to(Vector2(480,96))
 	elif branchNum == 2:

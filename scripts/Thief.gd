@@ -116,6 +116,7 @@ func go_off_screen():
 	var exitOne = Vector2(position.x + 64*8, position.y)
 	var exitTwo = Vector2(position.x - 64*8, position.y)
 	var target = Vector2()
+	print(exitOne.x - exitTwo.x)
 	if exitOne.x - exitTwo.x > 0:
 		target = exitOne
 	else:
